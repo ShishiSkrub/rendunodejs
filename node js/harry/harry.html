@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+</head>
+<body>
+    <input type="text" id="search-input" placeholder="Search for a character..." oninput="filterCharacters()">
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- 1 slide par maison -->
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <script>
+        const HOUSE_MEMBERS = {
+            Gryffindor: 15,
+            Slytherin: 15,
+            Ravenclaw: 15,
+            Hufflepuff: 15,
+        }
+
+        function fetchCharacters() {
+            return fetch('https://hp-api.lainocs.fr/characters')
+                .then((response) => response.json())
+        }
+
+        async function displayCharacters() {
+            const data = await fetchCharacters()
+            const swiperWrapper = document.querySelector('.swiper-wrapper')
+            Object.entries(HOUSE_MEMBERS).forEach(([house, amount]) => {
+                const houseCharacters = data.filter(character => character.house === house).slice(0, amount);
+                const houseSlide = document.createElement('div')
+                houseSlide.classList.add('swiper-slide')
+                swiperWrapper.appendChild(houseSlide)
+                houseSlide.innerHTML = `
+                    <h2>${house}</h2>
+                    <div class="character-container">
+                        ${houseCharacters
+                            .map(
+                                character => `
+                                    <a href="single-hp.html?slug=${character.slug}">
+                                        <div class="character">
+                                            <img src="${character.image}" alt="${character.name}">
+                                            <p>${character.name}</p>
+                                            <p>${character.house}</p>
+                                        </div>
+                                    </a>
+                                `
+                            )
+                            .join('')
+                        }
+                    </div>
+                `
+            });
+            initializeSwiper()
+        }
+
+        function initializeSwiper() {
+            const swiper = new Swiper('.swiper-container', {
+                slidesPerView: 'auto',
+                spaceBetween: 30,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            })
+        }
+
+        displayCharacters()
+        
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <form method="POST" id="formulaire">
+        <h2>Connexion</h2>
+        <div class="input-group">
+          <label for="username">Nom d'utilisateur</label>
+          <input type="text" id="email" name="username" required />
+        </div>
+        <div class="input-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Se connecter</button>
+        <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #333;
+    padding: 20px;
+  }
+  
+  .sidebar nav ul {
+    list-style: none;
+  }
+  
+  .sidebar nav ul li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar nav a {
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #555;
+  }
+  
+  .sidebar nav a:hover {
+    background-color: #777;
+  }
+  
+  main {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .character-image {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  
+  .character-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .character-info {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .character-info p {
+    margin-bottom: 10px;
+  }
+  
+  a.backend {
+    color: #4a4a4a;
+    background-color: #080022;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px 0;
+    display: block;
+   text-align: center;
+    transition: background-color 0.2s ease;
+  }
+  
+  a.backend:hover {
+    background-color: #ff0000;
+  }
+  
+  a.backend:active {
+    background-color: #bbb;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    
+    .sidebar {
+      order: 2;
+    }
+    
+    .character-image {
+      order: 1;
+      width: 100%;
+      padding: 0 10px;
+    }
+    
+    .character-info {
+      order: 3;
+      width: calc(100% - 20px);
+      padding: 10px;
+    }
+  }
+  
+  @media (hover: hover) {
+    a.backend:hover {
+      background-color: #ca0707;
+    }
+  }
+  
+  @media (min-width: 1000px) {
+    .container {
+      flex-wrap: nowrap;
+      padding: 30px;
+    }
+    
+    .sidebar {
+      padding: 20px;
+      margin: 0;
+    }
+    
+    .sidebar nav ul {
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .sidebar nav a {
+      color: #cab6b6;
+      padding: 10px;
+      border-radius: 10px;
+      margin-right: 20px;
+      background-color: #4a4a4a;
+      margin-bottom: 0;
+    }
+    
+    .character-image {
+      width: 40%;
+      margin: 0 20px;
+    }
+    
+    .character-info {
+      max-width: 500px;
+      width: 500px;
+      margin: 50px 0;
+    }
+  }

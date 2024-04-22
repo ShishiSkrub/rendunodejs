@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hogwarts Character</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="harry.html">Characters</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main>
+            <div id="character"></div>
+        </main>
+    </div>
+    <script>
+        function fetchCharacter() {
+            let url = window.location.search
+            let slug = new URLSearchParams(url).get('slug')
+            return fetch('https://hp-api.lainocs.fr/characters/' + slug)
+                .then((response) => response.json())
+        }
+
+        async function displayCharacter() {
+            const data = await fetchCharacter()
+            document.querySelector('#character').innerHTML = `
+                <h1>${data.name}</h1>
+                <div class="character-image">
+                    <img src="${data.image}" alt="${data.name}">
+                </div>
+                <div class="character-info">
+                    <p>House: ${data.house}</p>
+                    <p>Actor: ${data.actor}</p>
+                    <p>Role: ${data.role}</p>
+                    <a href="harry.html">Back</a>
+                </div>
+            `
+        }
+
+        displayCharacter()
+    </script>
+</body>
+</html>
